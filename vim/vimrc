@@ -1,0 +1,59 @@
+" Truecolor (24-bit color) support
+set termguicolors
+
+" Settings
+" -------
+if has('autocmd')
+  filetype plugin indent on
+endif
+
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+
+set expandtab     " change tabs to spaces
+" set tabs to 2 chars (ruby style)
+set shiftwidth=2
+set softtabstop=2
+
+set autoindent " Copy indent from current line when starting a new line
+syntax on " syntax highlight on
+set colorcolumn=80,120 " color columns at 80 and 120 characters width
+set hidden
+
+:set number
+
+" Save privilleged files with sudo
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
+" load plugins for vim and neovim
+if has('nvim')
+  call plug#begin('~/.config/nvim/plugged')
+else
+  call plug#begin('~/.vim/plugged')
+endif
+
+" Fuzzy finder
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+" Project directory tree
+Plug 'preservim/nerdtree'
+
+" Colorshemes
+Plug 'arcticicestudio/nord-vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+" Initialize plugin system
+call plug#end()
+
+" CTRL p  opens fzf
+nnoremap <C-p> :<C-u>FZF<CR>
+
+" CTRL n toggles NERDTree
+nnoremap <C-n> :NERDTreeToggle<CR>
+
+" Choose colorscheme
+colorscheme dracula
