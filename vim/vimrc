@@ -46,6 +46,13 @@ Plug 'cocopon/iceberg.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+" Neovim only (Lua plugin): render Markdown in the buffer.
+" Needs the markdown + markdown_inline treesitter parsers, which the official
+" Neovim builds bundle (Ubuntu's apt package does not), so no nvim-treesitter.
+if has('nvim-0.10')
+  Plug 'MeanderingProgrammer/render-markdown.nvim'
+endif
+
 " Initialize plugin system
 call plug#end()
 

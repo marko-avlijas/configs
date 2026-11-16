@@ -4,6 +4,11 @@
 
 Requires installed git, zsh, ohmyzsh, tmux, neovim.
 
+Neovim: use an official build >= 0.10 (github.com/neovim/neovim/releases),
+not Ubuntu's apt package: render-markdown.nvim needs the markdown treesitter
+parsers that only the official builds bundle. Headings and icons need a Nerd
+Font in the terminal.
+
 Setup gitconfig_secret
 
     cp git/gitconfig_secret.example git/gitconfig_secret
