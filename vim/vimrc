@@ -49,12 +49,30 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " Neovim only (Lua plugin): render Markdown in the buffer.
 " Needs the markdown + markdown_inline treesitter parsers, which the official
 " Neovim builds bundle (Ubuntu's apt package does not), so no nvim-treesitter.
+" Its heading/bullet/code icons are Nerd Font glyphs: the TERMINAL (host side)
+" must use a Nerd Font, e.g. "JetBrainsMono Nerd Font".
 if has('nvim-0.10')
+  Plug 'nvim-tree/nvim-web-devicons'   " language icons above code blocks
   Plug 'MeanderingProgrammer/render-markdown.nvim'
 endif
 
 " Initialize plugin system
 call plug#end()
+
+if has('nvim-0.10')
+lua << EOF
+local ok, rm = pcall(require, 'render-markdown')
+if ok then
+  rm.setup({
+    -- official Neovim builds bundle only the markdown parsers; these
+    -- optional features need parsers/tools we don't install
+    html = { enabled = false },
+    latex = { enabled = false },
+    yaml = { enabled = false },
+  })
+end
+EOF
+endif
 
 " CTRL p  opens fzf
 nnoremap <C-p> :<C-u>FZF<CR>
