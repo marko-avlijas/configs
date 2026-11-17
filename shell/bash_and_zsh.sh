@@ -1,4 +1,4 @@
-export EDITOR='vi' # is symlinked to nvim, check out configure nvim & vim script
+export EDITOR='nvim' # is symlinked to nvim, check out configure nvim & vim script
 
 alias be='bundle exec'
 alias tn='tmux new -s "$(basename $(pwd))"'

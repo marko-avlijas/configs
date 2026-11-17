@@ -21,6 +21,9 @@
         # with dates relative
         ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
 
+        # with graph, all branches
+        lg = log --graph --all --decorate --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]"
+
         # with dates absolute
 	lda = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 
@@ -28,7 +31,7 @@
 	default = simple
 [core]
 	excludesfile = ~/.gitignore_global
-	pager = less -FXR
+	pager = delta
 [diff]
 	tool = meld
 [difftool]
@@ -37,3 +40,15 @@
         cmd = meld "$LOCAL" "$REMOTE"
 [merge]
 	tool = meld
+	conflictStyle = zdiff3
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+        syntax-theme = Dracula
+        line-numbers = true
+        # A darker green behind added lines, so Dracula's grey-blue comments
+        # keep their contrast there too (the theme cannot style comments alone).
+        plus-style = syntax "#0b2a12"
+        plus-emph-style = syntax "#1d4d26"
