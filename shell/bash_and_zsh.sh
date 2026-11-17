@@ -1,13 +1,19 @@
-export EDITOR='nvim' # is symlinked to nvim, check out configure nvim & vim script
+export EDITOR='nvim'
 
 alias be='bundle exec'
-alias tn='tmux new -s "$(basename $(pwd))"'
+alias tn='tmux new -s "$(basename "$(pwd)")"'
 
-# Enable chruby
-source /usr/local/share/chruby/chruby.sh
-# Make chruby automatically change ruby version as you cd into project
-source /usr/local/share/chruby/auto.sh
+# Enable chruby (if installed)
+if [ -f /usr/local/share/chruby/chruby.sh ]; then
+  source /usr/local/share/chruby/chruby.sh
+  # Make chruby automatically change ruby version as you cd into project
+  source /usr/local/share/chruby/auto.sh
+fi
 
-# Enable nvm
-# export NVM_DIR="$HOME/src/nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# Add go to path if installed
+if [ -d /usr/local/go/bin ]; then export PATH="$PATH:/usr/local/go/bin"; fi
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Machine-specific settings live outside this public repo
+if [ -f "$HOME/.config/shell/local.sh" ]; then source "$HOME/.config/shell/local.sh"; fi

@@ -16,6 +16,8 @@ set expandtab     " change tabs to spaces
 set shiftwidth=2
 set softtabstop=2
 
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4
+
 set autoindent " Copy indent from current line when starting a new line
 syntax on " syntax highlight on
 set colorcolumn=80,120 " color columns at 80 and 120 characters width

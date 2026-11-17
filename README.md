@@ -17,6 +17,13 @@ Edit to include your name & email.
 
     ./create_symlinks.sh
 
+The repo can live anywhere under `$HOME` (`~/configs`, or `~/dotfiles/config`
+as a submodule of the private install repo); links point to where it is.
+
+Machine-specific shell settings (paths, env vars of one computer) go in
+`~/.config/shell/local.sh`, which `shell/bash_and_zsh.sh` sources if it exists.
+It is not part of this repo.
+
 
 To install tpm (tmux plugin manager)
 

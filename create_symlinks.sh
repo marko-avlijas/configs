@@ -1,6 +1,16 @@
+#!/usr/bin/env bash
+# Symlink the config files in this repo into $HOME. Works from wherever the
+# repo is cloned (e.g. ~/configs, or ~/dotfiles/config as a submodule), as
+# long as it is under $HOME: links are relative to $HOME.
+set -eu
+
 echo "Creating symlinks:"
 
-DOTFILES_DIR_ABS="$HOME/configs"
+DOTFILES_DIR_ABS="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+case "$DOTFILES_DIR_ABS" in
+  "$HOME"/*) ;;
+  *) echo "error: $DOTFILES_DIR_ABS is not under \$HOME" >&2; exit 1 ;;
+esac
 DOTFILES_DIR_REL_FROM_HOME="${DOTFILES_DIR_ABS#"$HOME/"}"
 
 echo "Symlinking git"
@@ -40,7 +50,7 @@ smart_append_to_file() {
   local path="$1"
   local text="$2"
 
-  if grep "$text" "$path" > /dev/null; then
+  if grep -qsF -- "$text" "$path"; then
     echo "Skipping - already present in $path:\n\t\t$text"
   else
     echo "$text" >> "$path" # append $text to $path
