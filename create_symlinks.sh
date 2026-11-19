@@ -19,8 +19,20 @@ for i in "${git_dotfiles[@]}"; do
   ln -sfv "$DOTFILES_DIR_REL_FROM_HOME/git/$i" "$HOME/.$i"
 done
 
-echo "Symlinking tmux"
-ln -sfv "$DOTFILES_DIR_REL_FROM_HOME/tmux/tmux.conf" "$HOME/.tmux.conf"
+echo "Symlinking tmux: ~/.config/tmux -> tmux/"
+mkdir -p "$HOME/.config"
+# an old ~/.tmux.conf would be loaded instead of ~/.config/tmux/tmux.conf
+if [ -L "$HOME/.tmux.conf" ]; then
+  rm -v "$HOME/.tmux.conf"
+elif [ -e "$HOME/.tmux.conf" ]; then
+  echo "warning: ~/.tmux.conf is a real file and overrides ~/.config/tmux; move it away" >&2
+fi
+if [ -e "$HOME/.config/tmux" ] && [ ! -L "$HOME/.config/tmux" ]; then
+  echo "warning: ~/.config/tmux is a real directory, not linking; move it away" >&2
+else
+  ln -sfnv "../$DOTFILES_DIR_REL_FROM_HOME/tmux" "$HOME/.config/tmux"
+fi
+"$HOME/.config/tmux/install-resurrect.sh"
 
 # Configure vim
 echo "Configuring vim"

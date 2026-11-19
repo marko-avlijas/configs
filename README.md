@@ -25,8 +25,14 @@ Machine-specific shell settings (paths, env vars of one computer) go in
 It is not part of this repo.
 
 
-To install tpm (tmux plugin manager)
+## tmux
 
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+The `tmux/` directory is linked to `~/.config/tmux` (tmux >= 3.2, Linux and
+macOS). No plugin manager and no theme plugin: the Dracula-colored status bar
+is written in `tmux.conf`; `tmux/status-info.sh` supplies battery and network
+text from local state only. The separators need a Powerline/Nerd Font.
 
-Press prefix + I (inside tmux) to install tmux plugins
+The one plugin, tmux-resurrect (prefix C-s saves, prefix C-r restores), is
+installed at a reviewed, pinned commit by `tmux/install-resurrect.sh`, which
+`create_symlinks.sh` runs. To update it, review the new commits and change the
+commit in that script.
