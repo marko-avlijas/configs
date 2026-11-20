@@ -34,15 +34,18 @@ else
 fi
 "$HOME/.config/tmux/install-resurrect.sh"
 
-# Configure vim
-echo "Configuring vim"
-ln -sfv "$DOTFILES_DIR_REL_FROM_HOME/vim/vimrc" "$HOME/.vimrc"
+# Vim is not used any more: remove the link to the vimrc this repo had
+if [ -L "$HOME/.vimrc" ]; then
+  case "$(readlink "$HOME/.vimrc")" in */vim/vimrc) rm -v "$HOME/.vimrc" ;; esac
+fi
 
-# Configure neovim
-echo "Configuring neovim"
-mkdir -p "$HOME/.config/nvim"
-ln -sfv "../../$DOTFILES_DIR_REL_FROM_HOME/neovim/init.vim" \
-        "$HOME/.config/nvim/init.vim"
+echo "Symlinking neovim: ~/.config/nvim -> nvim/"
+if [ -e "$HOME/.config/nvim" ] && [ ! -L "$HOME/.config/nvim" ]; then
+  echo "warning: ~/.config/nvim is a real directory (old vim-plug setup?), not linking;" >&2
+  echo "         move it away: mv ~/.config/nvim ~/.config/nvim.old" >&2
+else
+  ln -sfnv "../$DOTFILES_DIR_REL_FROM_HOME/nvim" "$HOME/.config/nvim"
+fi
 
 
 # Appends given text to given file

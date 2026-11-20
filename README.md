@@ -2,12 +2,10 @@
 
 ## Installation
 
-Requires installed git, zsh, ohmyzsh, tmux, neovim.
+Requires installed git, zsh, ohmyzsh, tmux, neovim; fd is optional.
 
-Neovim: use an official build >= 0.10 (github.com/neovim/neovim/releases),
-not Ubuntu's apt package: render-markdown.nvim needs the markdown treesitter
-parsers that only the official builds bundle. Headings and icons need a Nerd
-Font in the terminal.
+Neovim: an official build >= 0.12 (github.com/neovim/neovim/releases or brew),
+not Ubuntu's apt package, which is too old. Vim is not configured any more.
 
 Setup gitconfig_secret
 
@@ -36,3 +34,9 @@ The one plugin, tmux-resurrect (prefix C-s saves, prefix C-r restores), is
 installed at a reviewed, pinned commit by `tmux/install-resurrect.sh`, which
 `create_symlinks.sh` runs. To update it, review the new commits and change the
 commit in that script.
+
+## Neovim
+
+`nvim/` is linked to `~/.config/nvim`. No plugins so far: the default
+colorscheme, CTRL p is the built-in `:find` turned into a fuzzy picker (file
+list from `fd`, if installed), CTRL n toggles the built-in netrw file tree.
