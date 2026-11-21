@@ -37,6 +37,12 @@ commit in that script.
 
 ## Neovim
 
-`nvim/` is linked to `~/.config/nvim`. No plugins so far: the default
-colorscheme, CTRL p is the built-in `:find` turned into a fuzzy picker (file
-list from `fd`, if installed), CTRL n toggles the built-in netrw file tree.
+`nvim/` is linked to `~/.config/nvim`. The default colorscheme, CTRL p is the
+built-in `:find` turned into a fuzzy picker (file list from `fd`, if
+installed), CTRL n toggles the built-in netrw file tree.
+
+Plugins are managed by the built-in `vim.pack`: render-markdown.nvim and
+nvim-web-devicons (its icons). Both are pinned to a commit in `nvim/init.lua`
+and in the lockfile `nvim/nvim-pack-lock.json`. `nvim/install-plugins.sh`,
+which `create_symlinks.sh` runs, installs them at those commits. To update
+one, see the comment in `init.lua`. The icons need a Nerd Font.

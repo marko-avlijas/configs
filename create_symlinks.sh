@@ -45,6 +45,7 @@ if [ -e "$HOME/.config/nvim" ] && [ ! -L "$HOME/.config/nvim" ]; then
   echo "         move it away: mv ~/.config/nvim ~/.config/nvim.old" >&2
 else
   ln -sfnv "../$DOTFILES_DIR_REL_FROM_HOME/nvim" "$HOME/.config/nvim"
+  "$HOME/.config/nvim/install-plugins.sh"
 fi
 
 

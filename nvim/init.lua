@@ -1,5 +1,6 @@
--- Neovim >= 0.12. No plugins (yet). The whole nvim/ directory of this repo
--- is linked to ~/.config/nvim.
+-- Neovim >= 0.12. Plugins come from the built-in vim.pack (see the end of
+-- this file). The whole nvim/ directory of this repo is linked to
+-- ~/.config/nvim.
 
 -- Options
 -- -------
@@ -87,3 +88,33 @@ vim.keymap.set('n', '<C-n>', function()
     vim.cmd('Lexplore ' .. vim.fn.fnameescape(vim.fn.getcwd()))
   end
 end, { desc = 'Toggle file tree' })
+
+-- Plugins: vim.pack, built in
+-- ---------------------------
+-- Every plugin is pinned to a commit I have reviewed. The lockfile
+-- nvim-pack-lock.json next to this file is in git too. install-plugins.sh
+-- (run by create_symlinks.sh) installs them, or run nvim once.
+--
+-- To update one: put the new commit here, restart, then
+--   :lua vim.pack.update({ 'render-markdown.nvim' })
+-- shows the new commits; read them, :write applies, :quit refuses.
+-- Commit init.lua together with the lockfile.
+vim.pack.add({
+  {
+    src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim',
+    version = '640a3ec6d538bad17c328be373c7cad0293d9589',  -- v8.14.0, 2026-09-14
+  },
+  {
+    -- file type icons for render-markdown (code blocks); needs a Nerd Font
+    src = 'https://github.com/nvim-tree/nvim-web-devicons',
+    version = '0dc0cfb0c6858041174a53c7aa4adaf65e994b3c',  -- master, 2026-11-06
+  },
+}, { confirm = false })   -- pinned, so no question on first start
+
+-- render-markdown: draws headings, lists, tables, code blocks in the buffer.
+-- Uses the markdown parsers that ship with Neovim. :RenderMarkdown toggle
+require('render-markdown').setup({
+  latex = { enabled = false },   -- would run utftex / latex2text if installed
+  html = { enabled = false },    -- no html and yaml parsers in Neovim itself
+  yaml = { enabled = false },
+})

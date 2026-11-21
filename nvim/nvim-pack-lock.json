@@ -1,0 +1,14 @@
+{
+  "plugins": {
+    "nvim-web-devicons": {
+      "rev": "0dc0cfb0c6858041174a53c7aa4adaf65e994b3c",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons",
+      "version": "'0dc0cfb0c6858041174a53c7aa4adaf65e994b3c'"
+    },
+    "render-markdown.nvim": {
+      "rev": "640a3ec6d538bad17c328be373c7cad0293d9589",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim",
+      "version": "'640a3ec6d538bad17c328be373c7cad0293d9589'"
+    }
+  }
+}
